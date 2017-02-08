@@ -1,0 +1,12 @@
+language: go
+go:
+  - 1.5
+  - 1.6
+  - 1.7
+install:
+  - go get github.com/stretchr/testify
+  - go get github.com/mattn/goveralls
+script:
+  - go test -covermode=count -coverprofile=coverage.out -v github.com/ronelliott/go-digest-auth-transport
+after_success:
+  - goveralls -service travis-ci -covermode=count -coverprofile=coverage.out -repotoken=$COVERALLS_REPO_TOKEN
